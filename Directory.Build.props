@@ -1,0 +1,9 @@
+<Project>
+	<PropertyGroup>
+		<Authors>Lucas F Marçoni Ferreira</Authors>
+		<ProduceReferenceAssembly>false</ProduceReferenceAssembly>
+		<SatelliteResourceLanguages>en</SatelliteResourceLanguages>
+		<ImplicitUsings>disable</ImplicitUsings>
+		<Nullable>disable</Nullable>
+	</PropertyGroup>
+</Project>
