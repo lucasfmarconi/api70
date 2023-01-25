@@ -1,7 +1,7 @@
+using static Microsoft.AspNetCore.Builder.WebApplication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using static Microsoft.AspNetCore.Builder.WebApplication;
 
 internal class Program
 {

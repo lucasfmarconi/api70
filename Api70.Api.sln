@@ -5,7 +5,7 @@ VisualStudioVersion = 17.4.33103.184
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api70.Api", "src\Api70.Api\Api70.Api.csproj", "{3BB6F7A7-F491-4D1B-A37C-B14D574410EB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api70.Application", "src\Api70.Application\Api70.Application\Api70.Application.csproj", "{EAD4C496-9600-4953-92F9-E44A946B351B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api70.Application", "src\Api70.Application\Api70.Application.csproj", "{EAD4C496-9600-4953-92F9-E44A946B351B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
