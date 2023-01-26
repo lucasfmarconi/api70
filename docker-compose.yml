@@ -1,0 +1,17 @@
+version: '3.4'
+
+services:
+  api70.api:
+    image: ${DOCKER_REGISTRY-}api70api
+    build:
+      context: .
+      dockerfile: src/Api70.Api/Dockerfile
+  seq:
+    container_name: seq
+    image: datalust/seq:latest
+    ports:
+      - 5340:80
+      - 5341:5341
+    environment:
+      - ACCEPT_EULA=Y
+    restart: unless-stopped 
