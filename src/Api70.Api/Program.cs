@@ -3,6 +3,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Serilog;
 using System;
+using Api70.Application;
+using Api70.Infrastructure;
 using static Microsoft.AspNetCore.Builder.WebApplication;
 
 Log.Logger = new LoggerConfiguration()
@@ -25,6 +27,10 @@ try
     // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();
+
+    //Add Application Services
+    builder.Services.RegisterApplication();
+    builder.Services.RegisterInfrastructure(builder.Configuration);
 
     var app = builder.Build();
 
@@ -52,5 +58,4 @@ catch (Exception ex)
 finally
 {
     Log.CloseAndFlush();
-    Console.ReadKey();
 }

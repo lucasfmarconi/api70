@@ -12,15 +12,16 @@ internal class MessagePublisher : IMessagePublisher
     {
         this.logger = logger;
     }
-    public async Task<Result> PublishMessageAsync(JsonElement message, CancellationToken cancellationToken)
+    public async Task<Result> PublishMessageAsync(JsonDocument message, CancellationToken cancellationToken)
     {
         logger.BeginScope($"{nameof(MessagePublisher)}:{Guid.NewGuid()}");
         {
-            logger.LogDebug("Publishing message {@message}", message);
+            logger.LogDebug("Publishing message {message}", message.RootElement.ToString());
             await Task.Run(() =>
             {
-                var randomTimeMs = Random.Shared.Next(35, 150);
+                var randomTimeMs = Random.Shared.Next(1000, 30000);
                 Thread.Sleep(randomTimeMs);
+                logger.LogInformation("Message published after {randomTimeMs}", randomTimeMs);
             }, cancellationToken);
             return Result.Ok();
         }

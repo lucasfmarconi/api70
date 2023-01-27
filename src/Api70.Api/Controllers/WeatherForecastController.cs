@@ -1,8 +1,10 @@
+using Api70.Application.Messages;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using MediatR;
 
 namespace Api70.Api.Controllers;
 
@@ -15,11 +17,13 @@ public class WeatherForecastController : ControllerBase
         "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
     };
 
-    private readonly ILogger<WeatherForecastController> _logger;
+    private readonly ILogger<WeatherForecastController> logger;
+    private readonly IMediator mediator;
 
-    public WeatherForecastController(ILogger<WeatherForecastController> logger)
+    public WeatherForecastController(ILogger<WeatherForecastController> logger, IMediator mediator)
     {
-        _logger = logger;
+        this.logger = logger;
+        this.mediator = mediator;
     }
 
     [HttpGet(Name = "GetWeatherForecast")]
@@ -27,10 +31,19 @@ public class WeatherForecastController : ControllerBase
     {
         return Enumerable.Range(1, 5).Select(index => new WeatherForecast
         {
-            Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
+            Date = DateTime.Now.AddDays(index),
             TemperatureC = Random.Shared.Next(-20, 55),
             Summary = Summaries[Random.Shared.Next(Summaries.Length)]
         })
         .ToArray();
+    }
+
+    [HttpPost]
+    public ActionResult Post(WeatherForecast forecast)
+    {
+        logger.LogTrace("Messasge received {@forecast}", forecast);
+        var command = new PublishMessageCommand(forecast);
+        mediator.Send(command);
+        return Ok();
     }
 }
