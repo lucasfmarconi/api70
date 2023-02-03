@@ -8,11 +8,11 @@ services:
       dockerfile: src/Api70.Api/Dockerfile
     environment:
       ASPNETCORE_ENVIRONMENT: Development
-      RabbitMQ__Host: rabbitmq
+      RabbitMQ__Host: rabbitMQ
       RabbitMQ__Port: 5672
       RabbitMQ__Username: guest
       RabbitMQ__Password: guest
-      RabbitMQ__UseSsl: 'true'
+      RabbitMQ__UseSsl: 'false'
       RabbitMQ__VirtualHost: /
       RabbitMQ__RetryCount: 5
       RabbitMQ__ClientName: api70

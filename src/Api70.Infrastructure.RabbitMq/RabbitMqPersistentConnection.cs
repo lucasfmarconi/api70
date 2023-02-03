@@ -77,7 +77,7 @@ internal class RabbitMqPersistentConnection : IRabbitMqPersistentConnection
                 connection = connectionFactory.CreateConnection();
             });
 
-            if (IsConnected)
+            if (!IsConnected)
             {
                 const string errorMessage = "FATAL ERROR: RabbitMQ connections could not be created and opened";
                 logger.LogCritical("{message}", errorMessage);

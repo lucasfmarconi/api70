@@ -2,32 +2,30 @@
 using FluentResults;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Text;
 using System.Text.Json;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Api70.Infrastructure.Messages;
 internal class MessagePublisher : IMessagePublisher
 {
     private readonly ILogger<MessagePublisher> logger;
+    private readonly IBrokerMessagePublisher brokerMessagePublisher;
 
-    public MessagePublisher(ILogger<MessagePublisher> logger)
+    public MessagePublisher(ILogger<MessagePublisher> logger, IBrokerMessagePublisher brokerMessagePublisher)
     {
-        this.logger = logger;
+        this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
+        this.brokerMessagePublisher =
+            brokerMessagePublisher ?? throw new ArgumentNullException(nameof(brokerMessagePublisher));
     }
 
-    public async Task<Result> PublishMessageAsync(JsonDocument message, CancellationToken cancellationToken)
+    public Result PublishMessage(JsonDocument message)
     {
-        logger.BeginScope($"{nameof(MessagePublisher)}:{Guid.NewGuid()}");
-        {
-            logger.LogDebug("Publishing message {message}", message.RootElement.ToString());
-            await Task.Run(() =>
-            {
-                var randomTimeMs = Random.Shared.Next(1000, 30000);
-                Thread.Sleep(randomTimeMs);
-                logger.LogInformation("Message published after {randomTimeMs}", randomTimeMs);
-            }, cancellationToken);
-            return Result.Ok();
-        }
+        if(message == null)
+            return Result.Fail($"{nameof(message)} cannot be null.");
+
+        logger.LogTrace("Message will be sent to broker");
+
+        var byteArray = Encoding.UTF8.GetBytes(message.ToString());
+        return brokerMessagePublisher.PublishMessageAsync(byteArray);
     }
 }

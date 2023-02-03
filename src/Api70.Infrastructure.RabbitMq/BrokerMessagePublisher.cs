@@ -23,6 +23,8 @@ internal class BrokerMessagePublisher : IBrokerMessagePublisher
 
     public Result PublishMessageAsync(byte[] messageByteArray, string routingKey = "api70.all")
     {
+        if(!TryConnect())
+            return Result.Fail("Unable to connect to the RabbitMq Broker");
         logger.LogDebug("Message being published to broker.");
 
         if (messageByteArray == null) 
@@ -43,4 +45,7 @@ internal class BrokerMessagePublisher : IBrokerMessagePublisher
 
         return Result.Ok();
     }
+
+    private bool TryConnect() => 
+        persistentConnection.IsConnected || persistentConnection.TryConnect().IsSuccess;
 }

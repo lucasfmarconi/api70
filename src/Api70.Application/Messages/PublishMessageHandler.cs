@@ -15,10 +15,10 @@ internal class PublishMessageHandler : IRequestHandler<PublishMessageCommand, Re
     {
         this.messagePublisher = messagePublisher ?? throw new ArgumentNullException(nameof(messagePublisher));
     }
-    public async Task<Result> Handle(PublishMessageCommand request, CancellationToken cancellationToken)
+    public Task<Result> Handle(PublishMessageCommand request, CancellationToken cancellationToken)
     {
         var objectJsonString = JsonSerializer.Serialize(request.JsonElementMessage);
         var json = JsonDocument.Parse(objectJsonString);
-        return await messagePublisher.PublishMessageAsync(json, cancellationToken);
+        return Task.FromResult(messagePublisher.PublishMessage(json));
     }
 }
