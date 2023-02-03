@@ -1,8 +1,8 @@
 using System;
 
-namespace Api70.Api;
+namespace Api70.Core.Domain;
 
-public class WeatherForecast
+public record WeatherForecast
 {
     public DateTime Date { get; set; }
 

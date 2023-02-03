@@ -4,6 +4,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Api70.Core.Domain;
 using MediatR;
 
 namespace Api70.Api.Controllers;
@@ -42,7 +43,7 @@ public class WeatherForecastController : ControllerBase
     public ActionResult Post(WeatherForecast forecast)
     {
         logger.LogTrace("Messasge received {@forecast}", forecast);
-        var command = new PublishMessageCommand(forecast);
+        var command = new PublishWeatherForecastCommand(forecast);
         mediator.Send(command);
         return Ok();
     }

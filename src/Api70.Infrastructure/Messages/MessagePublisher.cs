@@ -25,7 +25,7 @@ internal class MessagePublisher : IMessagePublisher
 
         logger.LogTrace("Message will be sent to broker");
 
-        var byteArray = Encoding.UTF8.GetBytes(message.ToString());
+        var byteArray = Encoding.UTF8.GetBytes(message.RootElement.GetRawText());
         return brokerMessagePublisher.PublishMessageAsync(byteArray);
     }
 }
