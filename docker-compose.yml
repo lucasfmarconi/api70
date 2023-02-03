@@ -6,6 +6,18 @@ services:
     build:
       context: .
       dockerfile: src/Api70.Api/Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      RabbitMQ__Host: rabbitmq
+      RabbitMQ__Port: 5672
+      RabbitMQ__Username: guest
+      RabbitMQ__Password: guest
+      RabbitMQ__UseSsl: 'true'
+      RabbitMQ__VirtualHost: /
+      RabbitMQ__RetryCount: 5
+      RabbitMQ__ClientName: api70
+    depends_on:
+      - rabbitMQ
   seq:
     container_name: seq
     image: datalust/seq:latest
@@ -14,4 +26,19 @@ services:
       - 5341:5341
     environment:
       - ACCEPT_EULA=Y
-    restart: unless-stopped 
+    restart: unless-stopped
+  rabbitMQ:
+    container_name: rabbitMQ
+    ports:
+      - "15672:15672"
+      - "15692:15692" #prometheus metrics
+      - "5672:5672"
+    image: "rabbitmq:3.11.8-management-alpine"
+    healthcheck:
+      timeout: 15s
+      interval: 5s
+      retries: 5
+      test:
+        - "CMD"
+        - "rabbitmqctl"
+        - "status"

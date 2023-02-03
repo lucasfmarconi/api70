@@ -1,4 +1,4 @@
-﻿using Api70.Infrastructure.Messages;
+﻿using Api70.Core.Messages;
 using FluentResults;
 using Microsoft.Extensions.Logging;
 using RabbitMQ.Client;

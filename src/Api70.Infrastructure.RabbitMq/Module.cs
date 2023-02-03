@@ -1,14 +1,15 @@
-﻿using System;
-using Api70.Infrastructure.Messages;
+﻿using Api70.Core.Messages;
 using Api70.Infrastructure.RabbitMq.Settings;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace Api70.Infrastructure.RabbitMq;
 public static class Module
 {
+    public const string SectionName = "RabbitMQ";
     public static IServiceCollection RegisterRabbitMqInfrastructure(this IServiceCollection services,
         IConfigurationSection configurationSection)
     {

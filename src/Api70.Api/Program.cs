@@ -5,6 +5,7 @@ using Serilog;
 using System;
 using Api70.Application;
 using Api70.Infrastructure;
+using Api70.Infrastructure.RabbitMq;
 using static Microsoft.AspNetCore.Builder.WebApplication;
 
 Log.Logger = new LoggerConfiguration()
@@ -17,6 +18,8 @@ try
 
     builder.Host.UseSerilog((hosting, logging) =>
     {
+        logging.Enrich.WithThreadId();
+        logging.Enrich.WithThreadName();
         logging.Enrich.WithProperty("ApplicationId", Guid.NewGuid());
         logging.ReadFrom.Configuration(hosting.Configuration);
     });
@@ -31,6 +34,8 @@ try
     //Add Application Services
     builder.Services.RegisterApplication();
     builder.Services.RegisterInfrastructure(builder.Configuration);
+    builder.Services.RegisterRabbitMqInfrastructure(
+        builder.Configuration.GetSection(Api70.Infrastructure.RabbitMq.Module.SectionName));
 
     var app = builder.Build();
 
