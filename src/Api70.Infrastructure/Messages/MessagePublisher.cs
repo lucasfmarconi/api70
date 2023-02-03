@@ -1,7 +1,10 @@
 ﻿using Api70.Core.Messages;
 using FluentResults;
 using Microsoft.Extensions.Logging;
+using System;
 using System.Text.Json;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Api70.Infrastructure.Messages;
 internal class MessagePublisher : IMessagePublisher
@@ -12,6 +15,7 @@ internal class MessagePublisher : IMessagePublisher
     {
         this.logger = logger;
     }
+
     public async Task<Result> PublishMessageAsync(JsonDocument message, CancellationToken cancellationToken)
     {
         logger.BeginScope($"{nameof(MessagePublisher)}:{Guid.NewGuid()}");
