@@ -2,7 +2,7 @@
 using FluentResults;
 using RabbitMQ.Client;
 
-namespace Api70.Infrastructure.RabbitMq;
+namespace Api70.Infrastructure.RabbitMq.Connection;
 internal interface IRabbitMqPersistentConnection : IDisposable
 {
     bool IsConnected { get; }

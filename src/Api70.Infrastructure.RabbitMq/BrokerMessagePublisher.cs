@@ -1,4 +1,5 @@
 ﻿using Api70.Core.Messages;
+using Api70.Infrastructure.RabbitMq.Connection;
 using FluentResults;
 using Microsoft.Extensions.Logging;
 using RabbitMQ.Client;
@@ -23,19 +24,19 @@ internal class BrokerMessagePublisher : IBrokerMessagePublisher
 
     public Result PublishMessageAsync(byte[] messageByteArray, string routingKey = "api70.all")
     {
-        if(!TryConnect())
+        if (!TryConnect())
             return Result.Fail("Unable to connect to the RabbitMq Broker");
         logger.LogDebug("Message being published to broker.");
 
-        if (messageByteArray == null) 
+        if (messageByteArray == null)
             return Result.Fail("Message can not be null");
 
         logger.LogDebug("Message will be published to the broker {@messageByteArray}", messageByteArray);
-        
+
         using var channel = persistentConnection.CreateModel();
 
         channel.ExchangeDeclare(exchange: ExchangeName, type: ExchangeType.Topic);
-        
+
         channel.BasicPublish(exchange: ExchangeName,
             routingKey: routingKey,
             basicProperties: null,
@@ -46,6 +47,6 @@ internal class BrokerMessagePublisher : IBrokerMessagePublisher
         return Result.Ok();
     }
 
-    private bool TryConnect() => 
+    private bool TryConnect() =>
         persistentConnection.IsConnected || persistentConnection.TryConnect().IsSuccess;
 }

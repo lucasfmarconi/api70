@@ -8,7 +8,7 @@ using System;
 using System.IO;
 using System.Net.Sockets;
 
-namespace Api70.Infrastructure.RabbitMq;
+namespace Api70.Infrastructure.RabbitMq.Connection;
 
 internal class RabbitMqPersistentConnection : IRabbitMqPersistentConnection
 {
@@ -113,7 +113,7 @@ internal class RabbitMqPersistentConnection : IRabbitMqPersistentConnection
 
     private void OnConnectionShutdown(object sender, ShutdownEventArgs reason)
     {
-        if (Disposed) 
+        if (Disposed)
             return;
         logger.LogWarning("A RabbitMQ connection is on shutdown. Trying to re-connect...");
         TryConnect();

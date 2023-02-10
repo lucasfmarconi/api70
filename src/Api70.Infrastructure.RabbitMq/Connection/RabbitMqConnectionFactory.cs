@@ -1,7 +1,7 @@
 ﻿using Api70.Infrastructure.RabbitMq.Settings;
 using RabbitMQ.Client;
 
-namespace Api70.Infrastructure.RabbitMq;
+namespace Api70.Infrastructure.RabbitMq.Connection;
 internal static class RabbitMqConnectionFactory
 {
     public static ConnectionFactory CreateConnectionFactory(RabbitMqSetting rabbitMqSetting, string clientProvidedName)

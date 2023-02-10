@@ -1,4 +1,5 @@
 ﻿using Api70.Core.Messages;
+using Api70.Infrastructure.RabbitMq.Connection;
 using Api70.Infrastructure.RabbitMq.Settings;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
