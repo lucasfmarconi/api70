@@ -2,6 +2,7 @@ version: '3.4'
 
 services:
   api70.api:
+    container_name: api
     image: ${DOCKER_REGISTRY-}api70api
     build:
       context: .
@@ -16,8 +17,12 @@ services:
       RabbitMQ__VirtualHost: /
       RabbitMQ__RetryCount: 5
       RabbitMQ__ClientName: api70
+    ports:
+      - 60381:443
+      - 60380:80
     depends_on:
       - rabbitMQ
+  
   seq:
     container_name: seq
     image: datalust/seq:latest
@@ -27,6 +32,7 @@ services:
     environment:
       - ACCEPT_EULA=Y
     restart: unless-stopped
+  
   rabbitMQ:
     container_name: rabbitMQ
     ports:
@@ -42,3 +48,19 @@ services:
         - "CMD"
         - "rabbitmqctl"
         - "status"
+  
+  locust:
+    container_name: master
+    image: locustio/locust
+    ports:
+     - "8089:8089"
+    volumes:
+      - ./locust:/mnt/locust
+    command: -f /mnt/locust/locustfile.py --master -H http://locust:8089
+  
+  worker:
+    container_name: worker
+    image: locustio/locust
+    volumes:
+      - ./locust:/mnt/locust
+    command: -f /mnt/locust/locustfile.py --worker --master-host locust
