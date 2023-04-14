@@ -7,7 +7,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\Api70.Core\Api70.Core.csproj" />
 		<ProjectReference Include="..\Api70.Infrastructure\Api70.Infrastructure.csproj" />
 	</ItemGroup>
 

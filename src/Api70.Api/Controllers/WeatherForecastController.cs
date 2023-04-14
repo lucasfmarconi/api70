@@ -1,11 +1,11 @@
 using Api70.Application.Messages;
+using Api70.Core.Domain;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Api70.Core.Domain;
-using MediatR;
 
 namespace Api70.Api.Controllers;
 
