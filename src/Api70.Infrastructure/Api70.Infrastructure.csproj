@@ -1,7 +1,5 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
 	<ItemGroup>
-		<ProjectReference Include="..\Api70.Core\Api70.Core.csproj" />
+		<ProjectReference Include="..\Api70.Application\Api70.Application.csproj" />
 	</ItemGroup>
-
 </Project>

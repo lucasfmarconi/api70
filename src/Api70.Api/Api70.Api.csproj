@@ -1,14 +1,14 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
 	<PropertyGroup>
-	  <UserSecretsId>13a8022a-6369-4f5c-8141-0be5d2f06739</UserSecretsId>
-	  <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
-	  <DockerfileContext>..\..</DockerfileContext>
-	  <DockerComposeProjectPath>..\..\docker-compose.dcproj</DockerComposeProjectPath>
+		<UserSecretsId>13a8022a-6369-4f5c-8141-0be5d2f06739</UserSecretsId>
+		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+		<DockerfileContext>..\..</DockerfileContext>
+		<DockerComposeProjectPath>..\..\docker-compose.dcproj</DockerComposeProjectPath>
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <None Remove="*.log" />
+		<None Remove="*.log" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -28,8 +28,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\Api70.Application\Api70.Application.csproj" />
-	  <ProjectReference Include="..\Api70.Infrastructure.RabbitMq\Api70.Infrastructure.RabbitMq.csproj" />
+		<ProjectReference Include="..\Api70.Application\Api70.Application.csproj" />
+		<ProjectReference Include="..\Api70.Infrastructure.RabbitMq\Api70.Infrastructure.RabbitMq.csproj" />
 	</ItemGroup>
 
 </Project>
