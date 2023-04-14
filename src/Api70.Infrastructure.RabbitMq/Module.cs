@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
 using System.ComponentModel.DataAnnotations;
+using RabbitMQ.Client;
 
 namespace Api70.Infrastructure.RabbitMq;
 public static class Module
@@ -20,16 +21,20 @@ public static class Module
 
         Validator.ValidateObject(rabbitOptions, new ValidationContext(rabbitOptions), validateAllProperties: true);
 
-        services.AddSingleton<IBrokerMessagePublisher>(serviceProvider =>
-        {
-            var logger = serviceProvider.GetRequiredService<ILogger<BrokerMessagePublisher>>();
-            var factory = RabbitMqConnectionFactory.CreateConnectionFactory(rabbitOptions, rabbitOptions.ClientName);
-            var persistentConnectionLogger =
-                serviceProvider.GetRequiredService<ILogger<RabbitMqPersistentConnection>>();
+        services.AddSingleton<IConnectionFactory>(_ =>
+            RabbitMqConnectionFactory.CreateConnectionFactory(rabbitOptions, rabbitOptions.ClientName))
+            .AddHealthChecks()
+            .AddRabbitMQ();
 
-            return new BrokerMessagePublisher(logger,
-                new RabbitMqPersistentConnection(factory, persistentConnectionLogger, rabbitOptions.RetryCount));
+        services.AddSingleton<IRabbitMqPersistentConnection>(serviceProvider =>
+        {
+            var logger = serviceProvider.GetRequiredService<ILogger<RabbitMqPersistentConnection>>();
+            var factory = serviceProvider.GetRequiredService<IConnectionFactory>();
+            return new RabbitMqPersistentConnection(factory, logger, rabbitOptions.RetryCount);
         });
+
+        services.AddSingleton<IBrokerMessagePublisher, BrokerMessagePublisher>();
+
         return services;
     }
 }

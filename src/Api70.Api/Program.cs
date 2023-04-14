@@ -7,6 +7,7 @@ using Api70.Application;
 using Api70.Infrastructure;
 using Api70.Infrastructure.RabbitMq;
 using static Microsoft.AspNetCore.Builder.WebApplication;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 
 Log.Logger = new LoggerConfiguration()
     .WriteTo.Console()
@@ -51,6 +52,8 @@ try
     app.UseAuthorization();
 
     app.MapControllers();
+
+    app.MapHealthChecks("/health");
 
     app.UseSerilogRequestLogging();
 
