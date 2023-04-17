@@ -16,7 +16,7 @@ internal class RabbitMqPersistentConnection : IRabbitMqPersistentConnection
     private readonly ILogger<RabbitMqPersistentConnection> logger;
     private readonly int retryCount;
     private IConnection connection;
-    public bool Disposed;
+    private bool disposed;
 
     private readonly object syncRoot = new();
 
@@ -28,7 +28,7 @@ internal class RabbitMqPersistentConnection : IRabbitMqPersistentConnection
         this.retryCount = retryCount;
     }
 
-    public bool IsConnected => connection is { IsOpen: true } && !Disposed;
+    public bool IsConnected => connection is { IsOpen: true } && !disposed;
 
     public IModel CreateModel()
     {
@@ -40,9 +40,9 @@ internal class RabbitMqPersistentConnection : IRabbitMqPersistentConnection
 
     public void Dispose()
     {
-        if (Disposed) return;
+        if (disposed) return;
 
-        Disposed = true;
+        disposed = true;
 
         try
         {
@@ -88,7 +88,7 @@ internal class RabbitMqPersistentConnection : IRabbitMqPersistentConnection
             connection.CallbackException += OnCallbackException;
             connection.ConnectionBlocked += OnConnectionBlocked;
             logger.LogInformation(
-                "RabbitMQ Client acquired a persistent connection to '{HostName}' and is subscribed to failure events",
+                "RabbitMQ Client acquired a persistent connection to '{HostName}'",
                 connection.Endpoint.HostName);
 
             return Result.Ok();
@@ -97,7 +97,7 @@ internal class RabbitMqPersistentConnection : IRabbitMqPersistentConnection
 
     private void OnConnectionBlocked(object sender, ConnectionBlockedEventArgs e)
     {
-        if (Disposed)
+        if (disposed)
             return;
         logger.LogWarning("A RabbitMQ connection is shutdown. Trying to re-connect...");
         TryConnect();
@@ -105,7 +105,7 @@ internal class RabbitMqPersistentConnection : IRabbitMqPersistentConnection
 
     private void OnCallbackException(object sender, CallbackExceptionEventArgs e)
     {
-        if (Disposed)
+        if (disposed)
             return;
         logger.LogWarning("A RabbitMQ connection throw exception. Trying to re-connect...");
         TryConnect();
@@ -113,7 +113,7 @@ internal class RabbitMqPersistentConnection : IRabbitMqPersistentConnection
 
     private void OnConnectionShutdown(object sender, ShutdownEventArgs reason)
     {
-        if (Disposed)
+        if (disposed)
             return;
         logger.LogWarning("A RabbitMQ connection is on shutdown. Trying to re-connect...");
         TryConnect();
