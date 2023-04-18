@@ -8,7 +8,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\Api70.Infrastructure\Api70.Infrastructure.csproj" />
+	  <ProjectReference Include="..\Api70.Application\Api70.Application.csproj" />
 	</ItemGroup>
 
 </Project>
