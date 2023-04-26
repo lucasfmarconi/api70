@@ -20,7 +20,7 @@ internal class MessagePublisher : IMessagePublisher
 
     public Result PublishMessage(JsonDocument message)
     {
-        if(message == null)
+        if (message == null)
             return Result.Fail($"{nameof(message)} cannot be null.");
 
         logger.LogTrace("Message will be sent to broker");

@@ -11,7 +11,7 @@ internal class PublishWeatherForecastHandler : SafeHandler<PublishWeatherForecas
 {
     private readonly IMessagePublisher messagePublisher;
 
-    public PublishWeatherForecastHandler(IMessagePublisher messagePublisher, ILogger<PublishWeatherForecastHandler> logger) : base(logger) 
+    public PublishWeatherForecastHandler(IMessagePublisher messagePublisher, ILogger<PublishWeatherForecastHandler> logger) : base(logger)
         => this.messagePublisher = messagePublisher ?? throw new ArgumentNullException(nameof(messagePublisher));
 
     protected override Task<Result> HandleAsync(PublishWeatherForecastCommand request, CancellationToken cancellationToken)

@@ -1,5 +1,5 @@
-﻿using System.Threading.Tasks;
-using FluentResults;
+﻿using FluentResults;
+using System.Threading.Tasks;
 
 namespace Api70.Application.PipelineBehaviors;
 

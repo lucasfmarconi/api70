@@ -1,13 +1,12 @@
+using Api70.Application;
+using Api70.Infrastructure;
+using Api70.Infrastructure.RabbitMq;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Serilog;
 using System;
-using Api70.Application;
-using Api70.Infrastructure;
-using Api70.Infrastructure.RabbitMq;
 using static Microsoft.AspNetCore.Builder.WebApplication;
-using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 
 Log.Logger = new LoggerConfiguration()
     .WriteTo.Console()

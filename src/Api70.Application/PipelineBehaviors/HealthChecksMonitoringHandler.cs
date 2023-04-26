@@ -9,13 +9,13 @@ internal class HealthChecksMonitoringHandler : IErrorMonitoringHandler
 {
     private readonly ILogger<HealthChecksMonitoringHandler> logger;
     private readonly HealthCheckService healthCheckService;
-    
+
     public HealthChecksMonitoringHandler(ILogger<HealthChecksMonitoringHandler> logger, HealthCheckService healthCheckService)
     {
         this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
         this.healthCheckService = healthCheckService ?? throw new ArgumentNullException(nameof(healthCheckService));
     }
-    
+
     public async Task ReportAsync(Result result)
     {
         logger.LogError("Error: {@reasons}", result.Reasons);

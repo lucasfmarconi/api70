@@ -1,8 +1,8 @@
 ﻿using Api70.Application.PipelineBehaviors;
+using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
-using FluentValidation;
 
 namespace Api70.Application;
 public static class Module

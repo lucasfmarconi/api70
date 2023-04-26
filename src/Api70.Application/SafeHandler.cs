@@ -22,10 +22,10 @@ public abstract class SafeHandler<TRequest> : IRequestHandler<TRequest, Result>
             {
                 logger.LogTrace("Handling request {RequestType}", RequestType);
                 var result = await HandleAsync(request, cancellationToken);
-                
-                if(result.IsFailed)
+
+                if (result.IsFailed)
                     logger.LogWarning("Command handling failed with reasons: {@reasons}", result.Reasons);
-                
+
                 return result;
             }
             catch (Exception ex)

@@ -16,7 +16,7 @@ public static class Module
         IConfigurationSection configurationSection)
     {
         var rabbitOptions = configurationSection.Get<RabbitMqSetting>(c => c.BindNonPublicProperties = true);
-        if(rabbitOptions == null)
+        if (rabbitOptions == null)
             throw new ArgumentNullException(nameof(rabbitOptions));
 
         Validator.ValidateObject(rabbitOptions, new ValidationContext(rabbitOptions), validateAllProperties: true);
