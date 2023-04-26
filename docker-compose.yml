@@ -18,8 +18,8 @@ services:
       RabbitMQ__RetryCount: 5
       RabbitMQ__ClientName: api70
     ports:
-      - 60381:443
-      - 60380:80
+      - 5001:443
+      - 5000:80
     depends_on:
       - rabbitMQ
   
