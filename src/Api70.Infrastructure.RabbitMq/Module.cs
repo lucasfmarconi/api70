@@ -4,9 +4,9 @@ using Api70.Infrastructure.RabbitMq.Settings;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using RabbitMQ.Client;
 using System;
 using System.ComponentModel.DataAnnotations;
-using RabbitMQ.Client;
 
 namespace Api70.Infrastructure.RabbitMq;
 public static class Module
@@ -25,6 +25,8 @@ public static class Module
             RabbitMqConnectionFactory.CreateConnectionFactory(rabbitOptions, rabbitOptions.ClientName))
             .AddHealthChecks()
             .AddRabbitMQ();
+
+        services.AddHealthChecks().AddTypeActivatedCheck<DummyHealthChecker>("Dummy HC");
 
         services.AddSingleton<IRabbitMqPersistentConnection>(serviceProvider =>
         {
