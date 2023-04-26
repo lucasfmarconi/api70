@@ -33,14 +33,22 @@ internal class BrokerMessagePublisher : IBrokerMessagePublisher
 
         logger.LogDebug("Message will be published to the broker {@messageByteArray}", messageByteArray);
 
-        using var channel = persistentConnection.CreateModel();
+        try
+        {
+            using var channel = persistentConnection.CreateModel();
 
-        channel.ExchangeDeclare(exchange: ExchangeName, type: ExchangeType.Topic);
+            channel.ExchangeDeclare(exchange: ExchangeName, type: ExchangeType.Topic);
 
-        channel.BasicPublish(exchange: ExchangeName,
-            routingKey: routingKey,
-            basicProperties: null,
-            body: messageByteArray);
+            channel.BasicPublish(exchange: ExchangeName,
+                routingKey: routingKey,
+                basicProperties: null,
+                body: messageByteArray);
+        }
+        catch (Exception e)
+        {
+            logger.LogDebug(e, "Message cannot be published to the broker {@messageByteArray}", messageByteArray);
+            return Result.Fail(e.Message);
+        }
 
         logger.LogTrace("Message sent");
 
