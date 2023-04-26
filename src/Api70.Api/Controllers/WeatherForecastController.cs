@@ -45,6 +45,6 @@ public class WeatherForecastController : ControllerBase
         logger.LogTrace("Messasge received {@forecast}", forecast);
         var command = new PublishWeatherForecastCommand(forecast);
         mediator.Send(command);
-        return Ok();
+        return Accepted();
     }
 }
