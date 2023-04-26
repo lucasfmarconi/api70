@@ -21,6 +21,6 @@ internal class HealthChecksMonitoringHandler : IErrorMonitoringHandler
         logger.LogError("Error: {@reasons}", result.Reasons);
         var hcResult = await healthCheckService.CheckHealthAsync();
         if (hcResult.Status != HealthStatus.Healthy)
-            logger.LogWarning("Health Check problem {@yeah}", hcResult.Entries);
+            logger.LogWarning("Health Check problem {@resultEntries}", hcResult.Entries);
     }
 }
