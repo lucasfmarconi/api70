@@ -1,21 +1,20 @@
-﻿using System;
-using System.Text.Json;
+﻿using Api70.Core.Messages;
 using FluentResults;
-using MediatR;
+using Microsoft.Extensions.Logging;
+using System;
+using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
-using Api70.Core.Messages;
 
 namespace Api70.Application.Messages;
-internal class PublishWeatherForecastHandler : IRequestHandler<PublishWeatherForecastCommand, Result>
+internal class PublishWeatherForecastHandler : SafeHandler<PublishWeatherForecastCommand>
 {
     private readonly IMessagePublisher messagePublisher;
 
-    public PublishWeatherForecastHandler(IMessagePublisher messagePublisher)
-    {
-        this.messagePublisher = messagePublisher ?? throw new ArgumentNullException(nameof(messagePublisher));
-    }
-    public Task<Result> Handle(PublishWeatherForecastCommand request, CancellationToken cancellationToken)
+    public PublishWeatherForecastHandler(IMessagePublisher messagePublisher, ILogger<PublishWeatherForecastHandler> logger) : base(logger) 
+        => this.messagePublisher = messagePublisher ?? throw new ArgumentNullException(nameof(messagePublisher));
+
+    protected override Task<Result> HandleAsync(PublishWeatherForecastCommand request, CancellationToken cancellationToken)
     {
         var objectJsonString = JsonSerializer.Serialize(request.WeatherForecast);
         var json = JsonDocument.Parse(objectJsonString);
