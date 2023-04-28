@@ -1,6 +1,5 @@
 ﻿using Api70.Application.PipelineBehaviors;
 using Api70.Application.PipelineBehaviors.ErrorMonitoringHandlers;
-using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
