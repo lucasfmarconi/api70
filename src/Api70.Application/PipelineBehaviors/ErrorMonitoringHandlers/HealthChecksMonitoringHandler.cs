@@ -4,7 +4,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Threading.Tasks;
 
-namespace Api70.Application.PipelineBehaviors;
+namespace Api70.Application.PipelineBehaviors.ErrorMonitoringHandlers;
 internal class HealthChecksMonitoringHandler : IErrorMonitoringHandler
 {
     private readonly ILogger<HealthChecksMonitoringHandler> logger;

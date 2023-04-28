@@ -1,4 +1,5 @@
-﻿using FluentResults;
+﻿using Api70.Application.PipelineBehaviors.ErrorMonitoringHandlers;
+using FluentResults;
 using MediatR;
 using System;
 using System.Threading;

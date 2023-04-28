@@ -3,7 +3,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Api70.Application.PipelineBehaviors;
+namespace Api70.Application.PipelineBehaviors.ErrorMonitoringHandlers;
 public class ConsoleErrorMonitoringHandler : IErrorMonitoringHandler
 {
     private static readonly object SyncRoot = new();
