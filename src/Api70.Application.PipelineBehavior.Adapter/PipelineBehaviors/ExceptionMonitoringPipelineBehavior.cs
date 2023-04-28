@@ -1,12 +1,12 @@
-﻿using MediatR;
-using MediatR.Pipeline;
-using Microsoft.Extensions.Logging;
-using System;
+﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using MediatR;
+using MediatR.Pipeline;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
+using Microsoft.Extensions.Logging;
 
-namespace Api70.Application.PipelineBehaviors;
+namespace Api70.Application.PipelineBehavior.Adapter.PipelineBehaviors;
 
 public class ExceptionMonitoringPipelineBehavior<TRequest, TResponse, TException> : IRequestExceptionHandler<TRequest, TResponse, TException>
     where TRequest : IRequest<TResponse>

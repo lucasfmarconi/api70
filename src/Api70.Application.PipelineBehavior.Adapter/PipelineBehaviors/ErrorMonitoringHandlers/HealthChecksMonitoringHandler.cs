@@ -1,10 +1,10 @@
-﻿using FluentResults;
+﻿using System;
+using System.Threading.Tasks;
+using FluentResults;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Threading.Tasks;
 
-namespace Api70.Application.PipelineBehaviors.ErrorMonitoringHandlers;
+namespace Api70.Application.PipelineBehavior.Adapter.PipelineBehaviors.ErrorMonitoringHandlers;
 internal class HealthChecksMonitoringHandler : IErrorMonitoringHandler
 {
     private readonly ILogger<HealthChecksMonitoringHandler> logger;

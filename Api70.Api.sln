@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api70.Core", "src\Api70.Cor
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api70.Infrastructure", "src\Api70.Infrastructure\Api70.Infrastructure.csproj", "{43F5D169-CEE7-4196-8AB1-CE203307B406}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api70.Infrastructure.RabbitMq", "src\Api70.Infrastructure.RabbitMq\Api70.Infrastructure.RabbitMq.csproj", "{22ECE823-6F64-497D-BFAD-C618DDBAAE67}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api70.Infrastructure.RabbitMq", "src\Api70.Infrastructure.RabbitMq\Api70.Infrastructure.RabbitMq.csproj", "{22ECE823-6F64-497D-BFAD-C618DDBAAE67}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api70.Application.PipelineBehavior.Adapter", "src\Api70.Application.PipelineBehavior.Adapter\Api70.Application.PipelineBehavior.Adapter.csproj", "{9CE3F32C-727C-42D1-A662-9735CDC155B6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{22ECE823-6F64-497D-BFAD-C618DDBAAE67}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{22ECE823-6F64-497D-BFAD-C618DDBAAE67}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{22ECE823-6F64-497D-BFAD-C618DDBAAE67}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9CE3F32C-727C-42D1-A662-9735CDC155B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9CE3F32C-727C-42D1-A662-9735CDC155B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9CE3F32C-727C-42D1-A662-9735CDC155B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9CE3F32C-727C-42D1-A662-9735CDC155B6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

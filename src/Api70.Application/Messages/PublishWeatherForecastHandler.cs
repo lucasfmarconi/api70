@@ -1,11 +1,11 @@
 ﻿using Api70.Core.Messages;
 using FluentResults;
+using MediatR;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
-using MediatR;
 
 namespace Api70.Application.Messages;
 internal class PublishWeatherForecastHandler : IRequestHandler<PublishWeatherForecastCommand, Result>
