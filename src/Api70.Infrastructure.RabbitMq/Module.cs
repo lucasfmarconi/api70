@@ -26,8 +26,6 @@ public static class Module
             .AddHealthChecks()
             .AddRabbitMQ();
 
-        services.AddHealthChecks().AddTypeActivatedCheck<DummyHealthChecker>("Dummy HC");
-
         services.AddSingleton<IRabbitMqPersistentConnection>(serviceProvider =>
         {
             var logger = serviceProvider.GetRequiredService<ILogger<RabbitMqPersistentConnection>>();
