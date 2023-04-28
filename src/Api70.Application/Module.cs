@@ -1,4 +1,5 @@
 ﻿using Api70.Application.PipelineBehaviors;
+using Api70.Application.PipelineBehaviors.ErrorMonitoringHandlers;
 using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
@@ -22,8 +23,5 @@ public static class Module
         services.AddSingleton(typeof(IPipelineBehavior<,>), typeof(ErrorMonitoringPipelineBehavior<,>));
         services.AddSingleton<IErrorMonitoringHandler, ConsoleErrorMonitoringHandler>();
         services.AddSingleton<IErrorMonitoringHandler, HealthChecksMonitoringHandler>();
-
-        services.AddSingleton(typeof(IPipelineBehavior<,>), typeof(ValidationPipelineBehavior<,>));
-        services.AddValidatorsFromAssembly(ThisAssembly, ServiceLifetime.Transient);
     }
 }
