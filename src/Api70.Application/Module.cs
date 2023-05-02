@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
-using Api70.Application.PipelineBehavior.Adapter;
+using Api70.Application.PipelineBehavior;
 
 namespace Api70.Application;
 public static class Module

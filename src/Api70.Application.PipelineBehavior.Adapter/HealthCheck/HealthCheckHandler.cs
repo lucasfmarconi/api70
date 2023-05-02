@@ -1,11 +1,11 @@
 ﻿using System;
+using System.Threading;
+using System.Threading.Tasks;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Logging;
-using System.Threading;
-using System.Threading.Tasks;
 
-namespace Api70.Application.PipelineBehavior.Adapter.HealthCheck;
+namespace Api70.Application.PipelineBehavior.HealthCheck;
 internal class HealthCheckHandler : IHealthCheckHandler
 {
     private readonly ILogger<HealthCheckHandler> logger;

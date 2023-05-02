@@ -1,11 +1,11 @@
-﻿using Api70.Application.PipelineBehavior.Adapter.HealthCheck;
-using Api70.Application.PipelineBehavior.Adapter.PipelineBehaviors;
-using Api70.Application.PipelineBehavior.Adapter.PipelineBehaviors.ErrorMonitoringHandlers;
+﻿using Api70.Application.PipelineBehavior.HealthCheck;
+using Api70.Application.PipelineBehavior.PipelineBehaviors;
+using Api70.Application.PipelineBehavior.PipelineBehaviors.ErrorMonitoringHandlers;
 using MediatR;
 using MediatR.Pipeline;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Api70.Application.PipelineBehavior.Adapter;
+namespace Api70.Application.PipelineBehavior;
 public static class Module
 {
     public static IServiceCollection AddMediatRPipelineBehaviorAdapter(this IServiceCollection services)

@@ -1,12 +1,12 @@
-﻿using Api70.Application.PipelineBehavior.Adapter.HealthCheck;
+﻿using System;
+using System.Threading;
+using System.Threading.Tasks;
+using Api70.Application.PipelineBehavior.HealthCheck;
 using MediatR;
 using MediatR.Pipeline;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Threading;
-using System.Threading.Tasks;
 
-namespace Api70.Application.PipelineBehavior.Adapter.PipelineBehaviors;
+namespace Api70.Application.PipelineBehavior.PipelineBehaviors;
 
 internal class
     ExceptionMonitoringPipelineBehavior<TRequest, TResponse, TException> : IRequestExceptionHandler<TRequest, TResponse,

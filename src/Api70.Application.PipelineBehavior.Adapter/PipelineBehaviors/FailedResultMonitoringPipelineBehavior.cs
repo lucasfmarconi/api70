@@ -1,10 +1,10 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
-using Api70.Application.PipelineBehavior.Adapter.PipelineBehaviors.ErrorMonitoringHandlers;
+using Api70.Application.PipelineBehavior.PipelineBehaviors.ErrorMonitoringHandlers;
 using FluentResults;
 using MediatR;
 
-namespace Api70.Application.PipelineBehavior.Adapter.PipelineBehaviors;
+namespace Api70.Application.PipelineBehavior.PipelineBehaviors;
 internal class FailedResultMonitoringPipelineBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
     where TRequest : IRequest<TResponse>
 {
