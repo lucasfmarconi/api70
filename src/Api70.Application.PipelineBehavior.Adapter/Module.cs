@@ -1,4 +1,5 @@
-﻿using Api70.Application.PipelineBehavior.Adapter.PipelineBehaviors;
+﻿using Api70.Application.PipelineBehavior.Adapter.HealthCheck;
+using Api70.Application.PipelineBehavior.Adapter.PipelineBehaviors;
 using Api70.Application.PipelineBehavior.Adapter.PipelineBehaviors.ErrorMonitoringHandlers;
 using MediatR;
 using MediatR.Pipeline;
@@ -9,6 +10,8 @@ public static class Module
 {
     public static IServiceCollection AddMediatRPipelineBehaviorAdapter(this IServiceCollection services)
     {
+        services.AddMemoryCache();
+        services.AddSingleton<IHealthCheckHandler, HealthCheckHandler>();
         RegisterPipelineBehaviors(services);
         return services;
     }

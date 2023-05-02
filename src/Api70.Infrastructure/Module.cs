@@ -10,6 +10,7 @@ public static class Module
         IConfiguration configuration)
     {
         services.AddHealthChecks().AddTypeActivatedCheck<DummyHealthChecker>("Dummy HC");
+        services.AddHealthChecks().AddTypeActivatedCheck<CachedHealthChecker>("CachedHealthCheckStatus");
         services.AddSingleton<IMessagePublisher, MessagePublisher>();
         return services;
     }

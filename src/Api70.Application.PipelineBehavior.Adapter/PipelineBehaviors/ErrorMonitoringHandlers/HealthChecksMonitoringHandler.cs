@@ -1,26 +1,26 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using Api70.Application.PipelineBehavior.Adapter.HealthCheck;
 using FluentResults;
-using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Logging;
+using System;
+using System.Threading.Tasks;
 
 namespace Api70.Application.PipelineBehavior.Adapter.PipelineBehaviors.ErrorMonitoringHandlers;
 internal class HealthChecksMonitoringHandler : IErrorMonitoringHandler
 {
     private readonly ILogger<HealthChecksMonitoringHandler> logger;
-    private readonly HealthCheckService healthCheckService;
+    private readonly IHealthCheckHandler healthCheckHandler;
 
-    public HealthChecksMonitoringHandler(ILogger<HealthChecksMonitoringHandler> logger, HealthCheckService healthCheckService)
+    public HealthChecksMonitoringHandler(ILogger<HealthChecksMonitoringHandler> logger,
+        IHealthCheckHandler healthCheckHandler)
     {
         this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
-        this.healthCheckService = healthCheckService ?? throw new ArgumentNullException(nameof(healthCheckService));
+        this.healthCheckHandler = healthCheckHandler ?? throw new ArgumentNullException(nameof(healthCheckHandler));
     }
 
-    public async Task ReportAsync(Result result)
+    public Task ReportAsync(Result result)
     {
         logger.LogError("Error: {@reasons}", result.Reasons);
-        var hcResult = await healthCheckService.CheckHealthAsync();
-        if (hcResult.Status != HealthStatus.Healthy)
-            logger.LogWarning("Health Check problem {@resultEntries}", hcResult.Entries);
+        healthCheckHandler.PerformAndStoreHealthChecks();
+        return Task.CompletedTask;
     }
 }

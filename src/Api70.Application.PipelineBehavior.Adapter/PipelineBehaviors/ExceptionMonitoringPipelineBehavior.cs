@@ -1,33 +1,40 @@
-﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using Api70.Application.PipelineBehavior.Adapter.HealthCheck;
 using MediatR;
 using MediatR.Pipeline;
-using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Logging;
+using System;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Api70.Application.PipelineBehavior.Adapter.PipelineBehaviors;
 
-public class ExceptionMonitoringPipelineBehavior<TRequest, TResponse, TException> : IRequestExceptionHandler<TRequest, TResponse, TException>
+internal class
+    ExceptionMonitoringPipelineBehavior<TRequest, TResponse, TException> : IRequestExceptionHandler<TRequest, TResponse,
+        TException>
     where TRequest : IRequest<TResponse>
     where TException : Exception
 {
     private readonly ILogger<ExceptionMonitoringPipelineBehavior<TRequest, TResponse, TException>> logger;
-    private readonly HealthCheckService healthCheckService;
+    private readonly IHealthCheckHandler healthCheckHandler;
 
     public ExceptionMonitoringPipelineBehavior(
         ILogger<ExceptionMonitoringPipelineBehavior<TRequest, TResponse, TException>> logger,
-        HealthCheckService healthCheckService)
+        IHealthCheckHandler healthCheckHandler)
     {
         this.logger = logger;
-        this.healthCheckService = healthCheckService;
+        this.healthCheckHandler = healthCheckHandler;
     }
 
-    public async Task Handle(TRequest request, TException exception, RequestExceptionHandlerState<TResponse> state, CancellationToken cancellationToken)
+    public Task Handle(TRequest request, TException exception, RequestExceptionHandlerState<TResponse> state,
+        CancellationToken cancellationToken)
     {
-        logger.LogError(exception, "Something went wrong while handling request of type {@requestType}", typeof(TRequest));
-        var healthCheckResult = await healthCheckService.CheckHealthAsync(cancellationToken);
-        logger.LogWarning("Application Health Status is {Status}", healthCheckResult.Status);
+        logger.LogError(exception, "Something went wrong while handling request of type {@requestType}",
+            typeof(TRequest));
+       
+        healthCheckHandler.PerformAndStoreHealthChecks(cancellationToken: cancellationToken);
+
         state.SetHandled(default!);
+
+        return Task.CompletedTask;
     }
 }

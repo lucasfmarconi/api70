@@ -5,7 +5,7 @@ using FluentResults;
 using MediatR;
 
 namespace Api70.Application.PipelineBehavior.Adapter.PipelineBehaviors;
-public class FailedResultMonitoringPipelineBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
+internal class FailedResultMonitoringPipelineBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
     where TRequest : IRequest<TResponse>
 {
     private readonly IErrorMonitoringHandler errorHandler;

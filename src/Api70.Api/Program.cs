@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Serilog;
 using System;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using static Microsoft.AspNetCore.Builder.WebApplication;
 
 Log.Logger = new LoggerConfiguration()
@@ -53,6 +54,8 @@ try
     app.MapControllers();
 
     app.MapHealthChecks("/health");
+    app.MapHealthChecks("/healthz",
+        new HealthCheckOptions { Predicate = healthCheck => healthCheck.Name.Equals("CachedHealthCheckStatus") });
 
     app.UseSerilogRequestLogging();
 
