@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api70.Infrastructure", "src
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api70.Infrastructure.RabbitMq", "src\Api70.Infrastructure.RabbitMq\Api70.Infrastructure.RabbitMq.csproj", "{22ECE823-6F64-497D-BFAD-C618DDBAAE67}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api70.Application.PipelineBehavior.Adapter", "src\Api70.Application.PipelineBehavior.Adapter\Api70.Application.PipelineBehavior.Adapter.csproj", "{9CE3F32C-727C-42D1-A662-9735CDC155B6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api70.Application.PipelineBehavior", "src\Api70.Application.PipelineBehavior.Adapter\Api70.Application.PipelineBehavior.csproj", "{9CE3F32C-727C-42D1-A662-9735CDC155B6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
