@@ -4,7 +4,7 @@
 		<PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
 	</ItemGroup>
 	<ItemGroup>
-		<ProjectReference Include="..\Api70.Application.PipelineBehavior.Adapter\Api70.Application.PipelineBehavior.csproj" />
+		<ProjectReference Include="..\Api70.Application.PipelineBehavior\Api70.Application.PipelineBehavior.csproj" />
 		<ProjectReference Include="..\Api70.Core\Api70.Core.csproj" />
 	</ItemGroup>
 </Project>
